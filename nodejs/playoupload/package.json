@@ -1,0 +1,15 @@
+{
+  "name": "playo",
+  "version": "1.0.1",
+  "description": "test_nodeJs",
+  "main": "index.js",
+  "scripts": {
+    "test": "playoTest"
+  },
+  "keywords": [
+    "playo"
+  ],
+  "author": "playo",
+  "license": "ISC",
+  "readme": "README.md"
+}

@@ -1,0 +1,15 @@
+{
+  "name": "playo",
+  "version": "1.0.0",
+  "description": "playo_nodeJs",
+  "main": "index.js",
+  "scripts": {
+    "test": "playo"
+  },
+  "repository": {
+    "type": "git",
+    "url": "null"
+  },
+  "author": "playo",
+  "license": "ISC"
+}

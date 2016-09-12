@@ -1,0 +1,141 @@
+node.js记录:
+2016.07.27最新中文nodeJs官网 http://nodejs.cn/
+命令行npm初始化创建package.json:
+	命令行进入相应的工作目录,执行命令:
+		npm init
+	
+npm安装包命令:
+	本地模式:npm install express/npm i express	(不会添加相应环境变量,仅生成node_modules文件夹)
+	全局模式:npm install -g express/npm i -g express  (会添加相应环境变量)  
+				example:npm install -g supervisor 全局模式安装supervisor
+	
+	模 式 		可通过require使用 		注册PATH
+	本地模式 			是 					否
+	全局模式 			否 					是
+
+运行node.js文件:node xxx.js
+				supervisor xxx.js(该方式用于开发调试) 
+				
+发布nodeJs包:
+	创建账号:npm adduser
+	测试账号:npm whoami
+	在有package.json文件的包目录下运行npm publish进行发布
+	访问https://www.npmjs.com/查询用户创建的包
+	在任意电脑上使用npm install xxx(包名)安装包
+	取消发布:npm unpublish
+	
+调试:
+	命令行调试:
+		node debug xx.js
+	远程调试:
+		node --debug[=port] script.js
+		node --debug-brk[=port] script.js
+		
+			node --debug 命令选项可以启动调试服务器，默认情况下调试端口是 5858，也可以
+			使用 --debug=1234 指定调试端口为 1234。使用 --debug 选项运行脚本时，脚本会正常
+			执行，但不会暂停，在执行过程中调试客户端可以连接到调试服务器。如果要求脚本暂停执
+			行等待客户端连接，则应该使用 --debug-brk 选项。这时调试服务器在启动后会立刻暂停
+			执行脚本，等待调试客户端连接。
+	使用Eclipse调试Node.js:安装nodeEclipse插件
+	使用node-inspector调试Node.js:
+		首先,使用:
+			npm install -g node-inspector 命令安装node-inspector
+		然后在终端中通过:
+			node --debug-brk=5858 xxx.js 命令连接你要除错的脚本的调试服务器,
+		启动node-inspector:
+					node-inspector
+		在浏览器中打开 http://127.0.0.1:8080/debug?port=5858
+		
+		node-inspector使用了WebKit Web Inspector,因此只能在Chrome,Safari等WebKit内核的浏览器中使用,而不支持Firefox或Internet Explorer
+
+工具类util:
+	1.util.inherits 原形复制
+	2.util.inspect  将任意对象转化为字符串
+	3.其他工具类:util.isArray()	util.isRegExp() util.isDate() util.isError() util.format() util.debug()
+	
+时间驱动events:
+	events模块只提供了一个对象:events.EventEmitter
+	EventEmitter的核心就是事件发射与事件监听器功能的封装
+	EventEmitter 的每个事件由一个事件名和若干个参数组成,事件名是一个字符串,通常表达一定的语义
+	对于每个事件,EventEmitter支持若干个事件监听器
+	当事件发射时,注册到这个事件的事件监听器被依次调用,事件参数作为回调函数参数传递。
+	
+HTTP服务器与客户端
+	服务器：1.http.Server
+		    2.http.ServerRequest
+			3.获取GET请求内容 通过util.inspect(url.parse(req.url,true));
+			4.获取POST请求内容 
+			5.http.ServerResponse
+	客户端：1.http.request
+			2.http.get
+				http.ClientRequest(由http.request或http.get返回产生的对象,表示一个已经产生而且正在运行中的HTTP请求) 与http.ServerResponse相似
+				http.ClientResponse	与http.ServerRequest相似
+
+nodejs Web开发：(Express框架、MVC设计模式、ejs模板引擎以及MongoDB数据库的操作)
+	express:
+		全局安装express:npm install -g express
+		再安装一个命令工具,执行命令:npm install -g express-generator(expresss4.X版本中将命令工具分出来了)
+
+	创建一个express+ejs的项目(express默认的模板引擎是Jade):
+		express -e microblog
+		cd mocroblog && npm install
+	
+	安装Git
+		
+	安装bower做js包管理依赖(需要在本地安装Git,否则无法下载包)
+		全局安装bower npm install bower -g
+		
+		安装包命令:
+			如下载jquery:bower install jquery
+			  下载bootstrap:bower install bootstrap
+		
+		删除包命令:
+			bower uninstall jquery
+		
+		安装指定版本包:
+			bower install jquery#1.7.2
+			
+		升级指定包:
+			bower update jquery
+			
+		查看本地bower已经缓存的类库:
+			bower cache list
+		
+		express4不支持flash 需要先使用npm install connect-flash 然后在app.js中添加如下代码:app.use(flash());
+			
+相关网站：
+	http://www.expressjs.com.cn/starter/installing.html
+	http://www.tuicool.com/articles/U7buiy
+	
+MongoDB:
+	本地安装mongoDB
+	启动：
+		①：启动之前，我们要给mongodb指定一个文件夹，这里取名为”db",用来存放mongodb的数据。
+		②：微软徽标+R，输入cmd，首先找到“mongodb”的路径，然后运行mongod开启命令，同时用--dbpath指定数据存放地点为“db”文件夹。
+		cd C:\Program Files\MongoDB\Server\3.2\bin
+		mongod.exe --dbpath f:\mongodb\data
+		③：最后要看下是否开启成功，从图中的信息中获知，mongodb采用27017端口，那么我们就在浏览器里面键入“http://localhost:27017/”
+
+mongoose的安装(express连接MongoDB数据库)
+	切换到项目根目录下执行命令：
+		npm install mongoose 
+			
+启动microblog
+	F:
+	cd F:\nodejs\web\microblog
+	node ./bin/www
+
+express安装session模块
+	npm install express-session
+
+	
+JAX-RS
+
+
+github:
+1.windows Git下载路径:https://git-for-windows.github.io
+2.命令行输入：
+		$ git config --global user.name "Your Name"
+		$ git config --global user.email "email@example.com"
+		
+	注意git config命令的--global参数，用了这个参数，表示你这台机器上所有的Git仓库都会使用这个配置，当然也可以对某个仓库指定不同的用户名和Email地址。
